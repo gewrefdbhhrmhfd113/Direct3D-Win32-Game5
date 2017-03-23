@@ -4,6 +4,7 @@
 
 #include "pch.h"
 #include "Game.h"
+#include <WICTextureLoader.h>
 
 extern void ExitGame();
 
@@ -34,6 +35,12 @@ void Game::Initialize(HWND window, int width, int height)
     m_timer.SetFixedTimeStep(true);
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
     */
+
+	// スプライトバッチ
+	g_spriteBatch.reset(new SpriteBatch(m_deviceResources->GetD3DDeviceContext()));
+
+	// テクスチャ作成
+	DirectX::CreateWICTextureFromFile(m_deviceResources->GetD3DDevice(), L"TridentLogo.png", nullptr, &m_pTexture);
 }
 
 #pragma region Frame Update
@@ -75,6 +82,15 @@ void Game::Render()
 
     // TODO: Add your rendering code here.
     context;
+
+	RECT rect = { 0, 0, 256, 256 };
+
+	g_spriteBatch->Begin();
+
+	g_spriteBatch->Draw(m_pTexture, SimpleMath::Vector2(0, 192),
+		&rect, Colors::White, 0.0f, SimpleMath::Vector2(0, 0), SimpleMath::Vector2(2.5, 2.5));
+
+	g_spriteBatch->End();
 
     m_deviceResources->PIXEndEvent();
 
