@@ -7,6 +7,8 @@
 #include "DeviceResources.h"
 #include "StepTimer.h"
 #include "Model.h"
+#include "SpriteBatch.h"
+#include "SimpleMath.h"
 
 // A basic game implementation that creates a D3D11 device and
 // provides a game loop.
@@ -52,5 +54,7 @@ private:
     // Rendering loop timer.
     DX::StepTimer                           m_timer;
 
-	std::unique_ptr<Model>					model;
+	ID3D11ShaderResourceView* m_pTexture;
+
+	std::unique_ptr<DirectX::SpriteBatch> g_spriteBatch;
 };
