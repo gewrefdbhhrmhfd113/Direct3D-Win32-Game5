@@ -54,6 +54,7 @@ void Game::Tick()
 	
 	
 	bbbbbbbbbbbbbbbbb
+	aaaaa
 
     Render();
 }
